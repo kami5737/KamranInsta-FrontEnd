@@ -39,12 +39,6 @@ const VideoCard = ({ media, onDelete }) => {
     }
   };
 
-  const getMediaUrl = () => {
-    if (!media.mediaUrl) return null;
-    return media.mediaUrl.startsWith('http') || media.mediaUrl.startsWith('/uploads') 
-      ? media.mediaUrl 
-      : `/uploads/${media.mediaUrl}`;
-  };
 
   const handleRatingSubmit = async () => {
     try {
