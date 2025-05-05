@@ -1,38 +1,179 @@
-.App {
+body {
+  background-color: white;
+  position: relative;
+  overflow-x: hidden; /* Keep horizontal scroll blocked */
+  overflow-y: auto; 
+}
+
+
+.card {
+  background-color: rgba(82, 13, 13, 0.9); /* dark translucent */
+  border: 2px solid #d3f20c; /* hot pink border */
+  border-radius: 16px;
+  padding: 1rem;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(232, 183, 196, 0.3);
+}
+
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+input::file-selector-button {
+  border: none;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.media-container {
+  border: 2px solid #ff3e70;
+  border-radius: 12px;
+  background-color: #111;
+  overflow: hidden;
+}
+
+
+/* Style for the video card */
+.video-card {
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 0; /* Rectangular card */
+  border: 2px solid #333;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+/* Container for media content (video or image) */
+.media-container {
+  border-radius: 0; /* Rectangular media */
+  border: 2px solid #555;
+  background: #111;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.comments-section {
+  margin-bottom: 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 0; /* Rectangular */
+}
+
+.rating-section {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 0; /* Rectangular */
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.form-control {
+  border-radius: 0 !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Pill-shaped buttons */
+.btn {
+  border-radius: 20px !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Custom star icons */
+.stars span {
+  font-size: 1.8rem;
+  margin: 0 5px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Text colors */
+.card-title {
+  color: #7aa50d;
+}
+.card-text {
+  color: #76c71f;
+}
+.card-text small {
+  color: #0c66ba;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Image and video styles */
+.video-card video,
+.video-card img {
+  max-width: 100%;
+  height: auto;  /* Make sure it scales correctly */
+  border-radius: 10px;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  padding: 0.4rem 1.2rem;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #7aa50d;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+/* Caption text */
+.card-text {
+  font-size: 1rem;
+  color: #76c71f;
+  font-style:oblique;
+}
+
+.card-text small {
+  display: block;
+  margin-top: 0.25rem;
+  color: #0c66ba;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.upload-box {
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  color: #fff;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+  border: 1px solid #ff0033;
+}
+
+.form-heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ff0033;
+}
+
+.form-input {
+  background-color: #861e1e;
+  border: 1px solid #a22121;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.form-input::placeholder {
+  color: #ba2323;
+}
+
+.form-input:focus {
+  border-color: #65363f;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
