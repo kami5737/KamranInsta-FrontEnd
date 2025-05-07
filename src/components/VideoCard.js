@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Form, Button, ListGroup, Alert } from 'react-bootstrap';
 import { postComment, addRating, getComments } from '../api';
 
-const VideoCard = ({ media, onDelete }) => {
+const VideoCard = ({ media, onDelete,isCreator }) => {
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [rating, setRating] = useState(0);
@@ -51,45 +51,84 @@ const VideoCard = ({ media, onDelete }) => {
     }
   };
 
-  const renderMedia = () => {
-    if (!media?.mediaUrl) return <p>No media available</p>;
-    const mediaUrl = media.mediaUrl.startsWith('http') 
-      ? media.mediaUrl 
-      : `http://localhost:5000${media.mediaUrl}`;
+  // In your VideoCard component
+const renderMedia = () => {
+  if (!media?.mediaUrl) return <p>No media available</p>;
 
-    if (media.mediaType === 'video') {
-      return (
-        <div className="video-wrapper">
-          <video 
-            controls 
-            style={{ width: '100%', borderRadius: '0' }} // Rectangular
-          >
-            <source src={mediaUrl} type={`video/${mediaUrl.split('.').pop()}`} />
-          </video>
-        </div>
-      );
-    } else {
-      return (
-        <img
-          src={mediaUrl}
-          alt={media.title || 'uploaded media'}
-          style={{ width: '100%', borderRadius: '0' }} // Rectangular
-        />
-      );
-    }
-  };
+  // Make sure URL is properly formatted
+  const mediaUrl = media.mediaUrl.startsWith('http') 
+    ? media.mediaUrl 
+    : `https://instagram-clone-backend.azurewebsites.net${media.mediaUrl}`;
+
+  if (media.mediaType === 'video') {
+    return (
+      <video controls style={{ width: '100%' }}>
+        <source src={mediaUrl} type={`video/${mediaUrl.split('.').pop()}`} />
+        Your browser does not support the video tag.
+      </video>
+    );
+  } else {
+    return (
+      <img
+        src={mediaUrl}
+        alt={media.title || 'uploaded media'}
+        style={{ width: '100%' }}
+        onError={(e) => {
+          e.target.onerror = null; 
+          e.target.src = '/placeholder.jpg'; // Fallback image
+        }}
+      />
+    );
+  }
+};
+
+// const handleDelete = async () => {
+//   if (window.confirm('Are you sure you want to delete this post?')) {
+//     try {
+//       await onDelete(media._id);
+//       setSuccess('Post deleted successfully!');
+//       setTimeout(() => setSuccess(null), 3000);
+//     } catch (error) {
+//       setError(error.response?.data?.message || 'Failed to delete post');
+//     }
+//   }
+// };
+
 
   return (
     <Card className="video-card" style={{ marginBottom: '1rem' }}>
-      {onDelete && (
+    {/* {isCreator && (
         <button
-          onClick={onDelete}
+          onClick={handleDelete}
           className="delete-btn"
           aria-label="Delete post"
+          style={{
+            position: 'absolute',
+            top: '10px',
+            right: '10px',
+            background: 'rgba(255, 0, 0, 0.7)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '50%',
+            width: '30px',
+            height: '30px',
+            fontSize: '20px',
+            cursor: 'pointer',
+            zIndex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.2s',
+            ':hover': {
+              background: 'rgba(255, 0, 0, 1)',
+              transform: 'scale(1.1)'
+            }
+          }}
         >
           ×
         </button>
-      )}
+      )} */}
+
 
       <div className="media-container">{renderMedia()}</div>
       <Card.Body>

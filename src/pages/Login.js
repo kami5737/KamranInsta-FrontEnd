@@ -19,6 +19,8 @@ function Login({ onLogin }) {
     e.preventDefault();
     try {
       const response = await login(formData.username, formData.password);
+      console.log('Login response:', response); // Check the response data
+      console.log('Role from login:', response.role); // Verify role exists
       onLogin(response.role);
       navigate('/');
     } catch (error) {

@@ -5,6 +5,8 @@ import CreatorView from './pages/CreatorView';
 import ConsumerView from './pages/ConsumerView';
 import Login from './pages/Login';
 import Register from './pages/Register';
+//import { API_URL } from '../src/config'; // Import from config.js
+
 // import bgImage from './assets/instagram-icon.png';
 
 // const styles = {
@@ -23,6 +25,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const role = localStorage.getItem('role');
+    console.log('Loaded from storage:', { token, role }); // Debug storage
     if (token && role) {
       setIsAuthenticated(true);
       setUserRole(role);
@@ -59,6 +62,7 @@ function App() {
         />
         <Routes>
           <Route path="/login" element={!isAuthenticated ? <Login onLogin={(role) => {
+                console.log('Role received:', role); // Check the role
             setIsAuthenticated(true);
             setUserRole(role);
           }} /> : <Navigate to="/" />} />
@@ -66,7 +70,7 @@ function App() {
           <Route path="/" element={<ConsumerView />} />
           <Route 
             path="/creator" 
-            element={isAuthenticated && userRole === 'creator' ? <CreatorView /> : <Navigate to="/" />} 
+            element={isAuthenticated && userRole === 'creator' ? <CreatorView/> : <Navigate to="/" />} 
           />
         </Routes>
       </Router>

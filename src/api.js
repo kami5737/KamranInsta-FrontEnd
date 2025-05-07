@@ -1,4 +1,5 @@
 import axios from 'axios';
+//import { API_URL } from './config'; // Import from config.js
 
 console.log("Environment:", process.env);
 
@@ -15,11 +16,60 @@ export const register = async (username, password, role) => {
   return await axios.post(`${API_URL}/register`, { username, password, role });
 };
 
+// export const login = async (username, password) => {
+//   const response = await axios.post(`${API_URL}/login`, { username, password });
+//   console.log('Full login response:', response.data); // <-- Add this debug
+//   localStorage.setItem('token', response.data.token);
+//   localStorage.setItem('role', response.data.role);
+//   console.log('Login storage:', { // Add this for debugging
+//     token: response.data.token,
+//     role: response.data.role
+//   });
+//   return response.data;
+// };
+
 export const login = async (username, password) => {
-  const response = await axios.post(`${API_URL}/login`, { username, password });
-  localStorage.setItem('token', response.data.token);
-  localStorage.setItem('role', response.data.role);
-  return response.data;
+  try {
+    const response = await axios.post(`${API_URL}/login`, { username, password });
+    
+    if (response.data.message === 'Invalid credentials') {
+      throw new Error('Invalid credentials');
+    }
+    // Debug the full response structure
+    console.log('Full API response:', response.data);
+    
+    if (!response.data.success || !response.data.token) {
+      throw new Error('Invalid server response');
+    }
+    // Extract role - check both locations
+    const role = response.data.role || (response.data.user && response.data.user.role);
+    if (!role) {
+      throw new Error('Role not received');
+    }
+    
+    // Ensure both token and role are saved
+    localStorage.setItem('token', response.data.token);
+     localStorage.setItem('role', role);
+    
+    console.log('Saved to storage:', {
+      token: response.data.token,
+      role: role
+    });
+    
+    // return {
+    //   ...response.data,
+    //   role // Ensure role is included in returned data
+    // };
+    return {
+      token: response.data.token,
+      role: role,
+      user: response.data.user // if available
+    };
+    
+  } catch (error) {
+    console.error('Login error:', error);
+    throw error;
+  }
 };
 
 export const uploadMedia = async (formData) => {

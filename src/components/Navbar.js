@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 
 const NavigationBar = ({ isAuthenticated, userRole, onLogout }) => {
+  console.log('Navbar props:', { isAuthenticated, userRole });
   return (
     <Navbar style={{ 
       backgroundColor: '#2a3f54',
@@ -38,7 +39,10 @@ const NavigationBar = ({ isAuthenticated, userRole, onLogout }) => {
             >
               Main Page
             </Nav.Link>
-            {isAuthenticated && userRole === 'creator' && (
+            {isAuthenticated && (
+             <div>
+                {
+            userRole === 'creator' && (
               <Button
                 as={Link}
                 to="/creator"
@@ -59,6 +63,8 @@ const NavigationBar = ({ isAuthenticated, userRole, onLogout }) => {
                 Create Content
               </Button>
             )}
+              </div>
+              )}
           </Nav>
           <Nav>
             {!isAuthenticated ? (

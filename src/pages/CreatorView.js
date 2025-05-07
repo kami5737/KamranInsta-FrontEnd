@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import UploadForm from '../components/UploadForm';
 import VideoCard from '../components/VideoCard';
 import { getMedia, uploadMedia } from '../api';
+// import { API_URL } from '../config'; // Import from config.js
+// import axios from 'axios'; // Import axios
 
-function CreatorView() {
+
+function CreatorView({ apiUrl }) {
   const [mediaList, setMediaList] = useState([]);
 
   useEffect(() => {
@@ -17,6 +20,20 @@ function CreatorView() {
     };
     fetchMedia();
   }, []);
+
+  // const handleDelete = async (mediaId) => {
+  //   try {
+  //     await axios.delete(`${API_URL}/media/${mediaId}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem('token')}`
+  //       }
+  //     });
+  //     // Update state to remove the deleted media
+  //     setMediaList(mediaList.filter(media => media._id !== mediaId));
+  //   } catch (error) {
+  //     console.error('Delete error:', error);
+  //   }
+  // };
 
   const handleUpload = async (formData) => {
     try {
@@ -33,7 +50,13 @@ function CreatorView() {
       <UploadForm onUpload={handleUpload} />
       <div className="media-feed">
         {mediaList.map((media, index) => (
-          <VideoCard key={index} media={media} />
+          <VideoCard 
+          key={media._id} 
+          media={media}
+          // onDelete={handleDelete}
+          // isCreator={true} // Or use your actual role check
+          
+          />
         ))}
       </div>
     </div>
