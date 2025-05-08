@@ -27,7 +27,7 @@ jobs:
       - name: Build
         run: |
           npm run build
-          ls -R build # Verify build output
+          ls -R build # Just checking if /build exists
 
       - name: Deploy
         id: builddeploy
@@ -36,7 +36,6 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "build"       # Your built app directory
-          output_location: ""         # Empty since the output is already built
-          skip_app_build: true        # Prevent Azure from re-building
-
+          app_location: "."          # <- root of your repo
+          output_location: "build"   # <- your build folder
+          skip_app_build: true       # <- because you already ran npm run build manually
