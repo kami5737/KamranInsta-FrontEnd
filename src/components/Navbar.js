@@ -6,9 +6,9 @@ const NavigationBar = ({ isAuthenticated, userRole, onLogout }) => {
   console.log('Navbar props:', { isAuthenticated, userRole });
   return (
     <Navbar style={{ 
-      backgroundColor: '#2a3f54',
-      boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-      borderBottom: '1px solid #40566b'
+      backgroundColor: '#f01a33',
+      boxShadow: '0 2px 10px rgba(234, 31, 96, 0.1)',
+      borderBottom: '1px solidrgb(197, 206, 30)'
     }} variant="dark" expand="lg">
       <Container>
         <Navbar.Brand 
@@ -20,7 +20,7 @@ const NavigationBar = ({ isAuthenticated, userRole, onLogout }) => {
             letterSpacing: '0.5px'
           }}
         >
-          Ahmer Tariq
+        Kamran Khan Insta App
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -37,7 +37,7 @@ const NavigationBar = ({ isAuthenticated, userRole, onLogout }) => {
               }}
               className="nav-link-hover"
             >
-              Main Page
+              MY HOME
             </Nav.Link>
             {isAuthenticated && (
              <div>
@@ -51,7 +51,7 @@ const NavigationBar = ({ isAuthenticated, userRole, onLogout }) => {
                   padding: '8px 20px',
                   fontWeight: '500',
                   marginLeft: '300px',
-                  backgroundColor: '#4e7cff',
+                  backgroundColor: '#f01adb',
                   borderColor: '#4e7cff',
                   color: '#ffffff',
                   textTransform: 'uppercase',
@@ -60,7 +60,7 @@ const NavigationBar = ({ isAuthenticated, userRole, onLogout }) => {
                 }}
                 className="btn-hover-effect"
               >
-                Create Content
+                UPLOAD ME
               </Button>
             )}
               </div>
@@ -86,8 +86,8 @@ const NavigationBar = ({ isAuthenticated, userRole, onLogout }) => {
                   as={Link} 
                   to="/register"
                   style={{
-                    color: '#ffffff',
-                    backgroundColor: '#4e7cff',
+                    color: '#1af068',
+                    backgroundColor: '#f01adb',
                     padding: '8px 15px',
                     margin: '0 5px',
                     borderRadius: '4px',

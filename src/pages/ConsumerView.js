@@ -37,8 +37,8 @@ function ConsumerView() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{
-            width: "300px", 
-            float: "right",  
+            width: "200px", 
+            float: "left",  
             backgroundColor: "yellow"
             // marginBottom: "2rem", 
           }}
